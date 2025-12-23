@@ -37,6 +37,20 @@ public class PlayerMovement : MonoBehaviour
 
         // 2. 이동 입력 받기
         moveInput = new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
+
+        // Update 함수 안에 추가
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            // 레이캐스트(Raycast)를 쏴서 앞에 문이 있는지 확인
+            RaycastHit hit;
+            if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, 3f))
+            {
+                if (hit.collider.CompareTag("Door")) // 문의 태그를 Door로 설정하세요
+                {
+                    hit.collider.GetComponent<DoorController>().Interact();
+                }
+            }
+        }
     }
 
     void FixedUpdate()
