@@ -44,7 +44,7 @@ public class PlayerMovement : MonoBehaviour
             Debug.Log("좌클릭");
             // 레이캐스트(Raycast)를 쏴서 앞에 문이 있는지 확인
             RaycastHit hit;
-            if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, 3f))
+            if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, 6f))
             {
                 Debug.Log("레이캐스트");
                 if (hit.collider.CompareTag("Door")) // 문의 태그를 Door로 설정하세요
