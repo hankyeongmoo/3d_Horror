@@ -42,10 +42,8 @@ public class PlayerMovement : MonoBehaviour
         RaycastHit hit;
         if (Physics.Raycast(playerCamera.position, playerCamera.forward, out hit, 6f))
         {
-            Debug.Log("레이캐스트");
             if (hit.collider.CompareTag("Door"))
             {
-                Debug.Log("문 감지");
                 ShowInteraction.isCloseToDoor = true;
                 if(Input.GetKeyDown(KeyCode.Mouse0))
                 {

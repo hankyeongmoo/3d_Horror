@@ -26,16 +26,14 @@ public class StageManager : MonoBehaviour
     {
         switch (stageIndex)
         {
-            case 1:
-                return new Vector3 (-17.5f, 4.1f, -8f);
             case 2:
-                return new Vector3 (-17.5f, 4.1f, -8f);
+                return new Vector3 (-17.5f + 100f, 4.1f, -8f);
             case 3:
-                return new Vector3 (-17.5f, 4.1f, -8f);
+                return new Vector3 (-17.5f + 200f, 4.1f, -8f);
             case 4:
-                return new Vector3 (-17.5f, 4.1f, -8f);
+                return new Vector3 (-17.5f + 300f, 4.1f, -8f);
             case 5:
-                return new Vector3 (-17.5f, 4.1f, -8f);
+                return new Vector3 (-17.5f + 400f, 4.1f, -8f);
             default:
                 return new Vector3 (-17.5f, 4.1f, -8f);
         }
