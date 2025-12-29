@@ -18,6 +18,7 @@ public class StageManager : MonoBehaviour
         if (changeStage == true && player != null)
         {
             player.transform.position = getInitialPos();
+            player.transform.rotation = Quaternion.Euler(0, 0, 0);
             changeStage = false;
         }
     }
