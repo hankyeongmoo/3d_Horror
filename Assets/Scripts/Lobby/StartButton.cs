@@ -4,6 +4,7 @@ public class StartButton : MonoBehaviour
 {
     public void OnButtonClick()
     {
-        Loading.LoadScene("Game");
+        CameraMove.isCameraMove = true;
+        this.gameObject.SetActive(false);
     }
 }

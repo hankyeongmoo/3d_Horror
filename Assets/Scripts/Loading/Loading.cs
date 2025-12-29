@@ -10,8 +10,7 @@ public class Loading : MonoBehaviour
 
     public static void LoadScene(string sceneName)
     {
-        nextScene = sceneName;
-        SceneManager.LoadScene("Loading");
+        SceneManager.LoadScene(sceneName);
     }
 
     void Start()
