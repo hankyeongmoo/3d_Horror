@@ -11,12 +11,11 @@ public class DoorController : MonoBehaviour
 
     public void Interact()
     {
-        Debug.Log("작동");
-
         // 문 열기 실행
+        Debug.Log("문 작동");   
         animator.SetBool("isOpen", true);
         
-        // 더 이상 상호작용이 필요 없다면 스크립트 자체를 비활성화할 수도 있습니다.
+        // 스크립트 종료
         this.enabled = false; 
     }
 }
