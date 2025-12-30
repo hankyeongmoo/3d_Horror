@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class StageManager : MonoBehaviour
 {
@@ -17,6 +18,10 @@ public class StageManager : MonoBehaviour
     {
         if (changeStage == true && player != null)
         {
+            if(stageIndex == 6)
+            {
+                SceneManager.LoadScene("EndingScene");
+            }
             player.transform.position = getInitialPos();
             player.transform.rotation = Quaternion.Euler(0, 0, 0);
             changeStage = false;
