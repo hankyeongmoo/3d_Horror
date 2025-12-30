@@ -20,7 +20,7 @@ public class StageManager : MonoBehaviour
         {
             if(stageIndex == 6)
             {
-                SceneManager.LoadScene("EndingScene");
+                SceneManager.LoadScene("Ending");
             }
             player.transform.position = getInitialPos();
             player.transform.rotation = Quaternion.Euler(0, 0, 0);
