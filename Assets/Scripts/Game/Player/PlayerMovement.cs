@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -11,6 +12,16 @@ public class PlayerMovement : MonoBehaviour
     public Transform playerCamera;
     public float mouseSensitivity = 2f;
     private float xRotation = 0f;
+
+    [Header("Interaction")]
+    public Transform objectToLook_stage2;
+    public static bool isLookingAtObject_stage2 = false;
+    public Transform objectToLook_stage4;
+    public static bool isLookingAtObject_stage4 = false;
+    public float rotationSpeed = 5f;
+    private float lookTimer = 0f;
+    public float requiredLookTime = 2f;
+    private bool CanMove = true;
 
     void Start()
     {
@@ -59,11 +70,60 @@ public class PlayerMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        // 3. 물리 기반 이동 (Rigidbody)
-        // 바라보는 방향 기준으로 이동 방향 계산
-        Vector3 moveDir = transform.forward * moveInput.y + transform.forward * 0 + transform.right * moveInput.x;
-        
-        // y값은 기존 속도를 유지(중력 영향)하며 x, z 속도만 변경
-        rb.linearVelocity = new Vector3(moveDir.normalized.x * moveSpeed, rb.linearVelocity.y, moveDir.normalized.z * moveSpeed);
+        if(CanMove == true)
+        {
+            // 3. 물리 기반 이동 (Rigidbody)
+            // 바라보는 방향 기준으로 이동 방향 계산
+            Vector3 moveDir = transform.forward * moveInput.y + transform.forward * 0 + transform.right * moveInput.x;
+            
+            // y값은 기존 속도를 유지(중력 영향)하며 x, z 속도만 변경
+            rb.linearVelocity = new Vector3(moveDir.normalized.x * moveSpeed, rb.linearVelocity.y, moveDir.normalized.z * moveSpeed);
+        }
+
+        // 4. 특정 오브젝트 바라보기 (책장_stage2)
+        if(isLookingAtObject_stage2 && objectToLook_stage2 != null)
+        {
+            // 이동 불가
+            CanMove = false;
+
+            Vector3 direction = objectToLook_stage2.position - transform.position + new Vector3(0, 6f, 0);
+            // 해당 방향을 바라보기 위한 회전값 계산
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            // 현재 회전에서 타겟 회전까지 부드럽게 보간
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+            
+            // 2초 지속
+            lookTimer += Time.deltaTime;
+            if(lookTimer >= requiredLookTime)
+            {
+                isLookingAtObject_stage2 = false;
+                CanMove = true;
+                transform.rotation = Quaternion.Euler(0, 180f, 0);
+                lookTimer = 0f;
+            }
+        }
+
+        // 5. 특정 오브젝트 바라보기 (책장_stage4)
+        if(isLookingAtObject_stage4 && objectToLook_stage4 != null)
+        {
+            // 이동 불가
+            CanMove = false;
+
+            Vector3 direction = objectToLook_stage4.position - transform.position;
+            // 해당 방향을 바라보기 위한 회전값 계산
+            Quaternion targetRotation = Quaternion.LookRotation(direction);
+            // 현재 회전에서 타겟 회전까지 부드럽게 보간
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+            // 2초 지속
+            lookTimer += Time.deltaTime;
+            if(lookTimer >= requiredLookTime)
+            {
+                isLookingAtObject_stage4 = false;
+                CanMove = true;
+                transform.rotation = Quaternion.Euler(0, 180f, 0);
+                lookTimer = 0f;
+            }
+        }  
     }
 }
