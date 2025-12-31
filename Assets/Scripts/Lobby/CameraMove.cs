@@ -11,6 +11,13 @@ public class CameraMove : MonoBehaviour
         moveCount = 0;
     }
 
+    void Start()
+    {
+        // 마우스 커서를 보이게 하고 고정 해제
+        Cursor.lockState = CursorLockMode.None;
+        Cursor.visible = true;
+    }
+
     void FixedUpdate()
     {
         if (isCameraMove)
